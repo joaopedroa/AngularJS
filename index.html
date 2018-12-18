@@ -5,69 +5,16 @@
 	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
 	<script src="lib/angular/angular.js"></script>
 	<script src="lib/angular/angular-locale_pt-br.js"></script>
-	<style type="text/css">
-		.jumbotron{
-			width: 600px;
-			text-align: center;
-			margin-right: auto;
-			margin-left: auto;
-			margin-top:20px;
-		}
-		input,select{
-			margin-bottom: 5px;
-		}
-		.selecionado{
-			background:yellow;
-			font-weight: bold;
-		}
-	</style>
-	<script>
-		angular.module("listaTelefonica",[]);
-		angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope,$filter){
-
-			$scope.app = "Lista Telefonica";
-			$scope.contatos = [
-				{nome:$filter('uppercase')("Joao"), telefone: 99998888, operadora:{nome:"Vivo",codigo:15, categoria:"Celular"},data: new Date(),cor: "blue"},
-				{nome:"Pedro", telefone: 99998855,operadora:{nome:"Oi",codigo:14, categoria:"Celular"},data: new Date() ,cor: "yellow"},
-				{nome:"Marcos", telefone: 99995555,operadora:{nome:"Tim",codigo:41, categoria:"Celular"}, data: new Date(),cor: "red"},
-				{nome:"Maria", telefone: 999985555,operadora:{nome:"GVT",codigo:25, categoria:"Fixo"},data: new Date(), cor: "green"},
-			];
-			$scope.operadoras = [
-				{nome:"Oi",codigo:14, categoria:"Celular",preco:3},
-				{nome:"Vivo",codigo:15, categoria:"Celular",preco:3},
-				{nome:"Tim",codigo:41, categoria:"Celular",preco:3},
-				{nome:"GVT",codigo:25, categoria:"Fixo",preco:3},
-				{nome:"Embratel",codigo:21, categoria:"Fixo",preco:3}
-			];
-			
-
-			$scope.inserir = function(contato){
-					contato.data = new Date();						
-					$scope.contatos.push(angular.copy(contato));					
-					delete $scope.contato;
-					$scope.contatoValid.$setPristine();
-			}
-
-			$scope.apagar = function(contatos){
-
-				$scope.contatos = contatos.filter(function(x){
-					if(!x.selecionado) return x;				
-				});
-			}
-
-			$scope.isContatoSelecionado = function(contatos){
-					return contatos.some(function(x){
-						return x.selecionado;
-					});
-			}
-
-			$scope.ordernarPor = function(campo){
-				$scope.ordenado = campo;
-				$scope.ordem = !$scope.ordem ;
-			}
-
-		});
-	</script>
+	<link rel="stylesheet" type="text/css" href="css/app.css">
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/listaTelefonicaCtrl.js"></script>
+	<script type="text/javascript" src="js/services/rankingApiIbge.js"></script>
+	<script type="text/javascript" src="js/services/estadosApiIbge.js"></script>
+	<script type="text/javascript" src="js/value/configValue.js"></script>
+	<script type="text/javascript" src="js/services/serialGenerateService.js"></script>
+	<script type="text/javascript" src="js/Config/SerialGenerateConfig.js"></script>
+	<script type="text/javascript" src="js/Filters/filters.js"></script>
+	<script type="text/javascript" src="js/Filters/filterLenghtName.js"></script>
 </head>
 <body  ng-controller="listaTelefonicaCtrl">
 	<div class="jumbotron">
@@ -84,7 +31,7 @@
 			</tr>
 			<tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:{nome:buscando} | orderBy:ordenado:ordem">
 				<td><input type="checkbox" name="select" ng-model="contato.selecionado"></td>
-				<td>{{contato.nome}}</td>
+				<td>{{contato.nome | filterNome | lengthName:2}}</td>
 				<td>{{contato.telefone}}</td>
 				<td>{{contato.operadora.nome}}</td>
 				<td>{{contato.data | date:'dd/MM/yyyy HH:mm:ss'}}</td>

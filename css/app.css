@@ -1,0 +1,14 @@
+.jumbotron{
+			width: 600px;
+			text-align: center;
+			margin-right: auto;
+			margin-left: auto;
+			margin-top:20px;
+		}
+		input,select{
+			margin-bottom: 5px;
+		}
+		.selecionado{
+			background:yellow;
+			font-weight: bold;
+		}
