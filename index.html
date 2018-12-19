@@ -15,8 +15,10 @@
 	<script type="text/javascript" src="js/Config/SerialGenerateConfig.js"></script>
 	<script type="text/javascript" src="js/Filters/filters.js"></script>
 	<script type="text/javascript" src="js/Filters/filterLenghtName.js"></script>
+	<script type="text/javascript" src="js/Directives/uiAlertDirective.js"></script>
 </head>
 <body  ng-controller="listaTelefonicaCtrl">
+	<ui-alert message="Testando diretivas"></ui-alert>	
 	<div class="jumbotron">
 		<h3>{{app}}</h3>
 		<input class = "form-control" type="text" name="busca" ng-model="buscando" placeholder="O que você deseja buscar?">
