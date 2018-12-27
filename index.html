@@ -16,9 +16,10 @@
 	<script type="text/javascript" src="js/Filters/filters.js"></script>
 	<script type="text/javascript" src="js/Filters/filterLenghtName.js"></script>
 	<script type="text/javascript" src="js/Directives/uiAlertDirective.js"></script>
+	<script type="text/javascript" src="js/Directives/uiDate.js"></script>
 </head>
 <body  ng-controller="listaTelefonicaCtrl">
-	<ui-alert message="Testando diretivas"></ui-alert>	
+	<ui-alert message="operadoras"></ui-alert>	
 	<div class="jumbotron">
 		<h3>{{app}}</h3>
 		<input class = "form-control" type="text" name="busca" ng-model="buscando" placeholder="O que você deseja buscar?">
@@ -43,7 +44,9 @@
 		<hr/>		
 		<form name="contatoValid">
 			<input class="form-control" type="text" name="nome" ng-model="contato.nome" placeholder="Nome" ng-required="true" ng-minlength="10">
-			<input class="form-control" type="text" name="telefone" ng-model="contato.telefone" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/">			
+			<input class="form-control" type="text" name="telefone" ng-model="contato.telefone" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/">
+			<input class="form-control" type="text" name="data" ng-model="contato.data" placeholder="Data" ng-required="true" ui-date>
+			{{contato.data}}
 			<select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome + ' ( ' +(operadora.preco | currency) + ' )' group by operadora.categoria for operadora in operadoras | orderBy:'nome'" ng-required="true">
 				<option value="">Selecione uma operadora...</option>
 			</select>
