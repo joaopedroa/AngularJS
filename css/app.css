@@ -12,3 +12,16 @@
 			background:yellow;
 			font-weight: bold;
 		}
+.title{
+	background:red;
+}
+.content{
+	background:green;
+}
+.cc{
+	width: 600px;
+			text-align: center;
+			margin-right: auto;
+			margin-left: auto;
+			margin-top:20px;
+}
