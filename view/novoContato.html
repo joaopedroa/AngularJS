@@ -1,0 +1,26 @@
+	<div class="jumbotron">	
+		<form name="contatoValid">
+			<input class="form-control" type="text" name="nome" ng-model="contato.nome" placeholder="Nome" ng-required="true" ng-minlength="10">
+			<input class="form-control" type="text" name="telefone" ng-model="contato.telefone" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/">
+			<input class="form-control" type="text" name="data" ng-model="contato.data" placeholder="Data" ng-required="true" ui-date>
+			{{contato.data}}
+			<select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome + ' ( ' +(operadora.preco | currency) + ' )' group by operadora.categoria for operadora in operadoras | orderBy:'nome'" ng-required="true">
+				<option value="">Selecione uma operadora...</option>
+			</select>
+		</form>
+		<button class = "btn btn-primary btn-block" ng-click="inserir(contato)" ng-disabled="contatoValid.$invalid">Adicionar um contato</button>	
+		<button class = "btn btn-danger btn-block" ng-click="apagar(contatos)" ng-disabled="!isContatoSelecionado(contatos)">Apagar contatos</button>
+
+		<div ng-show="contatoValid.nome.$error.required && contatoValid.nome.$dirty">
+			Por favor, preencha o nome!
+		</div>	
+		<div ng-show="contatoValid.nome.$error.minlength ">
+			O valor mínimo são 10 caracteres.
+		</div>
+		<div ng-show="contatoValid.telefone.$error.required && contatoValid.telefone.$dirty">
+			Por favor, preencha o telefone!
+		</div>
+		<div ng-show="contatoValid.telefone.$error.pattern ">
+			O telefone deve ter o seguinte formato 00000-0000.
+		</div>
+	</div>

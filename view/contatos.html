@@ -1,0 +1,36 @@
+<div >
+<ui-accordion-pai>
+	<ui-accordion titulo="Teste 01">
+		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.		
+	</ui-accordion>
+
+	<ui-accordion titulo="Teste 02">
+		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.		
+	</ui-accordion>
+</ui-accordion-pai>
+	<ui-alert message="operadoras"></ui-alert>	
+	<div class="jumbotron">
+		<h3>{{app}}</h3>
+		<input class = "form-control" type="text" name="busca" ng-model="buscando" placeholder="O que você deseja buscar?">
+		<table class = "table">
+			<tr>
+				<th></th>
+				<th><a href="" ng-click ="ordernarPor('nome')">Nome</a></th>
+				<th><a href="" ng-click="ordernarPor('telefone')">Telefone</a></th>
+				<th>Operadora</th>
+				<th>Data</th>
+				<th></th>
+			</tr>
+			<tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:{nome:buscando} | orderBy:ordenado:ordem">
+				<td><input type="checkbox" name="select" ng-model="contato.selecionado"></td>
+				<td>{{contato.nome | filterNome | lengthName:2}}</td>
+				<td>{{contato.telefone}}</td>
+				<td>{{contato.operadora.nome}}</td>
+				<td>{{contato.data | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+				<td><div style="width: 20px;height: 20px" ng-style="{'background-color': contato.cor}"></div></td>
+			</tr>
+		</table>
+		<hr/>		
+		<a href="#!/novoContato" class = "btn btn-primary btn-block">Novo Contato</a>
+	</div>
+</div>

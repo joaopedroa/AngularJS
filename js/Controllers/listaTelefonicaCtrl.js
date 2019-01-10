@@ -1,4 +1,4 @@
-angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope,$filter,rankingAPI,estadosAPI,SerialGenerate){
+angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope,$filter,rankingAPI,$location,estadosAPI,SerialGenerate){
 			console.log(SerialGenerate.generate());
 			$scope.app = "Lista Telefonica";
 			$scope.contatos = [
@@ -21,6 +21,7 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($s
 					$scope.contatos.push(angular.copy(contato));					
 					delete $scope.contato;
 					$scope.contatoValid.$setPristine();
+					$location.path('/contatos');
 			}
 
 			$scope.apagar = function(contatos){
