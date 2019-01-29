@@ -1,6 +1,11 @@
 angular.module("listaTelefonica").service('estadosAPI',function($http,config){
-	this.getEstados = function(){
-		return $http.get(config.baseUrl + "/v1/localidades/estados/");
+	this.getEstados = function(idEstado){
+		if(idEstado == null){
+			return $http.get(config.baseUrl + "/v1/localidades/estados/");
+		}
+		else{
+			return $http.get(config.baseUrl + "/v1/localidades/estados/" + idEstado + "/mesorregioes");	
+		}
 	}
 
 })

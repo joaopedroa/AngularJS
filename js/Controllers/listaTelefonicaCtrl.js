@@ -1,4 +1,4 @@
-angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope,$filter,rankingAPI,$location,estadosAPI,SerialGenerate){
+angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope,$filter,rankingAPI,$location,estadosAPI,SerialGenerate,$rootScope){
 			console.log(SerialGenerate.generate());
 			$scope.app = "Lista Telefonica";
 			$scope.contatos = [
@@ -50,14 +50,22 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($s
 				});
 			}
 
-			$scope.getEstados = function(){
-				estadosAPI.getEstados().then(data =>{
-					$scope.estados = data.data;
-					console.log('Estados: ',$scope.estados);
-				})
+		
+			$scope.verEstados = function(){
+				console.log('idestado', $scope.idEstado)
+				if($scope.idEstado === null || $scope.idEstado === "" || $scope.idEstado === undefined){
+					return alertify.error('Você precisa digitar o id de um estado pelo menos.');
+				}else{
+					$rootScope.idEstado = $scope.idEstado;		
+					$scope.idEstado = null;			
+					$location.path('/tableEstados');
+
+				}
 			}
+
 			// chamadas de funções
 			$scope.getRankings();
-			$scope.getEstados();
+			
+
 
 		});
